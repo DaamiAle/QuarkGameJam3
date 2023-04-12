@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "QuarkGameJam3/1.0.0": {
+        "runtime": {
+          "QuarkGameJam3.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "QuarkGameJam3/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
