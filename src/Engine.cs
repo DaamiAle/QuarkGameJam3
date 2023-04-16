@@ -10,29 +10,51 @@ namespace QuarkGameJam3.src
         /// <param name="direccion">Direccion a mover</param>
         public static void Mover(Movible gameObject, Direccion direccion)
         {
-            Coordenadas posicionObject = gameObject.Posicion();
-            Console.SetCursorPosition(posicionObject.X, posicionObject.Y);
-            Console.Write(" ");
+            Ocultar(gameObject);
             if (direccion == Direccion.Arriba)
             {
-                posicionObject.Y -= 1;
+                gameObject.Posicion().Y -= 2;
             }
             else if (direccion == Direccion.Derecha)
             {
-                posicionObject.X += 1;
+                gameObject.Posicion().X += 2;
             }
             else if (direccion == Direccion.Abajo)
             {
-                posicionObject.Y += 1;
+                gameObject.Posicion().Y += 2;
             }
             else if (direccion == Direccion.Izquierda)
             {
-                posicionObject.X -= 1;
+                gameObject.Posicion().X -= 2;
             }
-            Console.SetCursorPosition(posicionObject.X, posicionObject.Y);
-            Console.Write(gameObject.Repr());
+            Mostrar(gameObject);
         }
-        
+        /// <summary>
+        /// Renderiza en pantalla un GameObject.
+        /// </summary>
+        /// <param name="gameObject">GameObject a renderizar</param>
+        public static void Mostrar(GameObject gameObject)
+        {
+            string reprGameObject = gameObject.Repr();
+            Coordenadas posGameObject = gameObject.Posicion();
+            Console.SetCursorPosition(posGameObject.X, posGameObject.Y);
+            Console.Write(reprGameObject + reprGameObject);
+            Console.SetCursorPosition(posGameObject.X, posGameObject.Y + 1);
+            Console.Write(reprGameObject + reprGameObject);
+
+        }
+        /// <summary>
+        /// Elimina de escena un GameObject.
+        /// </summary>
+        /// <param name="gameObject">GameObject a eliminar</param>
+        public static void Ocultar(GameObject gameObject)
+        {
+            Coordenadas posGameObject = gameObject.Posicion();
+            Console.SetCursorPosition(posGameObject.X, posGameObject.Y);
+            Console.Write("  ");
+            Console.SetCursorPosition(posGameObject.X, posGameObject.Y + 1);
+            Console.Write("  ");
+        }
 
     }
 }
