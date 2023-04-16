@@ -6,28 +6,28 @@ namespace QuarkGameJam3.src
         /// <summary>
         /// Mueve un objeto que puede ser movido hacia la direccion dada.
         /// </summary>
-        /// <param name="gameObject">Objeto movible a mover</param>
+        /// <param name="movibleObject">Objeto movible a mover</param>
         /// <param name="direccion">Direccion a mover</param>
-        public static void Mover(Movible gameObject, Direccion direccion)
+        public static void Mover(Movible movibleObject, Direccion direccion)
         {
-            Ocultar(gameObject);
+            Ocultar(movibleObject);
             if (direccion == Direccion.Arriba)
             {
-                gameObject.Posicion().Y -= 2;
+                movibleObject.Posicion().Y -= 2;
             }
             else if (direccion == Direccion.Derecha)
             {
-                gameObject.Posicion().X += 2;
+                movibleObject.Posicion().X += 2;
             }
             else if (direccion == Direccion.Abajo)
             {
-                gameObject.Posicion().Y += 2;
+                movibleObject.Posicion().Y += 2;
             }
             else if (direccion == Direccion.Izquierda)
             {
-                gameObject.Posicion().X -= 2;
+                movibleObject.Posicion().X -= 2;
             }
-            Mostrar(gameObject);
+            Mostrar(movibleObject);
         }
         /// <summary>
         /// Renderiza en pantalla un GameObject.
