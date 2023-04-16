@@ -14,8 +14,7 @@ namespace QuarkGameJam3.src
         public static void Inicializar(Coordenadas posicionInicial)
         {
             entidad = new Movible(posicionInicial, "@");
-            Console.SetCursorPosition(entidad.Posicion().X, entidad.Posicion().Y);
-            Console.Write(entidad.Repr());
+            Engine.Mostrar(entidad);
         }
         /// <summary>
         /// Mueve al jugar segun la direccion deseada.
