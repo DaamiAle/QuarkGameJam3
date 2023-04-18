@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuarkGameJam3", "QuarkGameJam3.csproj", "{B9BEADF4-593F-4C2E-B13F-208EEE35903D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuarkGameJam3", "QuarkGameJam3.csproj", "{B9BEADF4-593F-4C2E-B13F-208EEE35903D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuarkGameJam3_Utilities", "..\QuarkGameJam3_Utilities\QuarkGameJam3_Utilities.csproj", "{AC2E4CEF-1767-4C2A-BADE-26EFBB3D5172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuarkGameJam3_Presenter", "..\QuarkGameJam3_Presenter\QuarkGameJam3_Presenter.csproj", "{0F523AB6-7A0F-4B97-A3F9-85AD93836585}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuarkGameJam3_Domain", "..\QuarkGameJam3_Domain\QuarkGameJam3_Domain.csproj", "{B6B63202-3C72-4776-9167-C336981BCDCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{B9BEADF4-593F-4C2E-B13F-208EEE35903D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9BEADF4-593F-4C2E-B13F-208EEE35903D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9BEADF4-593F-4C2E-B13F-208EEE35903D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC2E4CEF-1767-4C2A-BADE-26EFBB3D5172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC2E4CEF-1767-4C2A-BADE-26EFBB3D5172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC2E4CEF-1767-4C2A-BADE-26EFBB3D5172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC2E4CEF-1767-4C2A-BADE-26EFBB3D5172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F523AB6-7A0F-4B97-A3F9-85AD93836585}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F523AB6-7A0F-4B97-A3F9-85AD93836585}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F523AB6-7A0F-4B97-A3F9-85AD93836585}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F523AB6-7A0F-4B97-A3F9-85AD93836585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B63202-3C72-4776-9167-C336981BCDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B63202-3C72-4776-9167-C336981BCDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B63202-3C72-4776-9167-C336981BCDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B63202-3C72-4776-9167-C336981BCDCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
