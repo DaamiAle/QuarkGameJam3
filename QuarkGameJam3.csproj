@@ -7,9 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\QuarkGameJam3_Presenter\QuarkGameJam3_Presenter.csproj" />
-    <ProjectReference Include="..\QuarkGameJam3_Utilities\QuarkGameJam3_Utilities.csproj" />
-  </ItemGroup>
-
 </Project>
