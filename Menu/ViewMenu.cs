@@ -102,6 +102,7 @@ namespace QuarkGameJam3.Menu
             int left = Console.WindowWidth / 2 - text.Length / 2;
             Console.SetCursorPosition(left, top);
             Console.WriteLine(text);
+            Console.CursorVisible = false;
         }
 
         public void Close()
