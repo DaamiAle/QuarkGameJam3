@@ -8,6 +8,13 @@ namespace QuarkGameJam3.src.Utilities
             StartGame,
             LevelList,
             Exit
-        }       
+        }
+
+        public enum Direction 
+        {
+            Up = 0,
+            Right, 
+            Down, Left 
+        }
     }
 }
