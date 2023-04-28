@@ -1,22 +1,24 @@
 ﻿
+using QuarkGameJam3.src.Manager;
 using QuarkGameJam3.src.Utilities;
+using static QuarkGameJam3.src.Utilities.Enum;
 
 namespace QuarkGameJam3.src.Domain.Entities
 {
     public  class Board
     {
-        public int filas;
-        public int columnas;
-        private GameObject[,] objetos;
+        public int rows;
+        public int columns;
+        private GameObject[,] objects;
 
         public Board(int filas, int columnas)
         {
-            this.filas = filas;
-            this.columnas = columnas;
-            this.objetos = new GameObject[filas, columnas];
-            Inicializar();
+            this.rows = filas;
+            this.columns = columnas;
+            this.objects = new GameObject[filas, columnas];
+            Initialize();
         }
-        public void Inicializar()
+        public void Initialize()
         {
             
             int consoleWidth = Console.WindowWidth;
@@ -25,68 +27,63 @@ namespace QuarkGameJam3.src.Domain.Entities
             for (int i = 0; i < consoleHeight; i++)
             {
                
-                for (int j = 0; j < columnas; j++)
+                for (int j = 0; j < columns; j++)
                 {
-                    if (i < 0 || i >= filas || j < 0 || j >= columnas)
+                    if (i < 0 || i >= rows || j < 0 || j >= columns)
                     {
                      
                         continue;
                     }
                     if (i == 0 || j == 0 || i == consoleHeight - 1 || j == consoleWidth - 1)
                     {
-                        objetos[i, j] = new Wall(new Coordinates(i, j), this);
+                        objects[i, j] = new Wall(new Coordinates(i, j), this);
                     }
                     else
                     {
-                        objetos[i, j] = new EmptySpace(new Coordinates(i, j), this);
+                        objects[i, j] = new EmptySpace(new Coordinates(i, j), this);
                     }
                 }
             }
         }
 
-        public bool PosicionVacia(Coordinates posicion)
+        public bool EmptyPosition(Coordinates position)
         {
-            return objetos[posicion.X, posicion.Y].GetType() == typeof(EmptySpace);
+            return objects[position.X, position.Y].GetType() == typeof(EmptySpace);
         }
 
-        public bool HayBox(Coordinates posicion)
+        public bool ThereIsBox(Coordinates position)
         {
-            return objetos[posicion.X, posicion.Y].GetType() == typeof(Box);
+            return objects[position.X, position.Y].GetType() == typeof(Box);
         }
 
 
-        public Box GetBoxAtPosition(Coordinates posicion)
+        public Box GetBoxAtPosition(Coordinates position)
         {
-            if (objetos[posicion.X, posicion.Y].GetType() == typeof(Box))
+            if (objects[position.X, position.Y].GetType() == typeof(Box))
             {
-                return (Box)objetos[posicion.X, posicion.Y];
+                return (Box)objects[position.X, position.Y];
             }
             else
             {
                 return null;
             }
         }
-        public void MoverGameObject(GameObject objeto, Coordinates posicionNueva)
+
+   
+        public void MoverGameObject(GameObject gameObject, Coordinates newPosition)
         {
-            // Obtener la posición actual del objeto
-            Coordinates posicionActual = objeto.Posicion();
-
-            // Actualizar el tablero: vaciar la casilla actual y colocar el objeto en la nueva casilla
-            objetos[posicionActual.X, posicionActual.Y] = new EmptySpace(posicionActual, this);
-            objetos[posicionNueva.X, posicionNueva.Y] = objeto;
-
-            // Actualizar la posición del objeto
-            objeto.SetPosition(posicionNueva);
+            Console.SetCursorPosition(newPosition.X, newPosition.Y);
+            Console.Write(gameObject.Symbol);
         }
 
-        public void Dibujar()
+        public void Draw()
         {
 
-            for (int i = 0; i < filas; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < columnas; j++)
+                for (int j = 0; j < columns; j++)
                 {
-                    if (i == 0 || i == filas - 1 || j == 0 || j == columnas - 1)
+                    if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1)
                     {
                         Console.Write("#");
                     }
@@ -99,24 +96,34 @@ namespace QuarkGameJam3.src.Domain.Entities
             }
         }
        
-        public bool EstaDentroDelTablero(Coordinates coordenada)
+        public bool Insidethedashboard(Coordinates coordinates)
         {
-            return coordenada.X >= 0 && coordenada.X < columnas && coordenada.Y >= 0 && coordenada.Y < filas;
+            return coordinates.X >= 0 && coordinates.X < columns && coordinates.Y >= 0 && coordinates.Y < rows;
         }
 
 
-        public void AddGameObject(GameObject objeto)
+        public void AddGameObject(GameObject gameObject)
         {
-            Coordinates coordenada = objeto.Posicion();
+            Coordinates coordinate = gameObject.Posicion();
 
-            if (EstaDentroDelTablero(coordenada))
+            if (Insidethedashboard(coordinate))
             {
-                objetos[coordenada.Y, coordenada.X] = objeto;
+                objects[coordinate.Y, coordinate.X] = gameObject;
             }
             else
             {
                 Console.WriteLine("It's on the outside");
             }
         }
+     
+            public void RemoveGameObject(GameObject gameObject)
+            {
+
+                Console.SetCursorPosition(gameObject.Position.X, gameObject.Position.Y);
+                Console.Write(" ");
+            }
     }
-}
+
+    }
+ 
+    

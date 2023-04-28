@@ -9,52 +9,54 @@ namespace QuarkGameJam3.src.Domain.Entities
         {
 
         public override string Symbol => "X";
-        public Player(Coordinates pos, Board tablero) : base(pos, tablero)
+        public Player(Coordinates pos, Board board) : base(pos, board)
         {
-           // Engine.ShowGameObjectOnScreen(");
         }
 
-        public override Coordinates CalcularNuevaPosicion(Direction direccion)
+
+        public override Coordinates CalculateNewPosition(Direction direction)
         {
-            Coordinates nuevaPos = base.CalcularNuevaPosicion(direccion);
-            if (!Board.EstaDentroDelTablero(nuevaPos))
+            Coordinates newPosition = base.CalculateNewPosition(direction);
+            if (!Board.Insidethedashboard(newPosition))
             {
                 return Position;
             }
-
-            return nuevaPos;
-            
+            return newPosition;
         }
 
 
         public void Move(Direction direction)
         {
-            Coordinates nuevaPos = CalcularNuevaPosicion(direction);
-            GameObject objetoEnNuevaPos = Board.GetBoxAtPosition(nuevaPos);
+            Coordinates newPosition = CalculateNewPosition(direction);
+            GameObject objectEnNewPosition = Board.GetBoxAtPosition(newPosition);
 
-
-            if (objetoEnNuevaPos is Wall)
+            if (objectEnNewPosition is Wall)
             {
                 return;
             }
 
-            if (objetoEnNuevaPos is Box)
+            if (objectEnNewPosition is Box)
             {
-                Box box = (Box)objetoEnNuevaPos;
-                Coordinates nuevaPosBox = box.CalcularNuevaPosicion(direction);
-                GameObject objetoEnNuevaPosBox =Board.GetBoxAtPosition(nuevaPosBox);
+                Box box = (Box)objectEnNewPosition;
+                Coordinates newPositionBox = box.CalculateNewPosition(direction);
+                GameObject objectInNewPosBox = Board.GetBoxAtPosition(newPositionBox);
 
-                if (objetoEnNuevaPosBox is Wall || objetoEnNuevaPosBox is Box)
+                if (objectInNewPosBox is Wall || objectInNewPosBox is Box)
                 {
                     return;
                 }
-
-                Board.MoverGameObject(box, nuevaPosBox);
+                Board.MoverGameObject(box, newPositionBox);
             }
 
-            Board.MoverGameObject(this, nuevaPos);
+            if (newPosition != null)
+            {
+                Board.RemoveGameObject(this);
+                Position = newPosition;
+               
+            }
+            Board.MoverGameObject(this, newPosition);
         }
-
+      
+        }
     }
-  }
 

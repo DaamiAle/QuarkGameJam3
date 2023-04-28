@@ -1,7 +1,6 @@
 ﻿using QuarkGameJam3.src.Domain;
 using QuarkGameJam3.src.Domain.Entities;
 using QuarkGameJam3.src.Utilities;
-using System.Runtime.CompilerServices;
 using static QuarkGameJam3.src.Utilities.Enum;
 
 namespace QuarkGameJam3.src.Manager
@@ -9,81 +8,64 @@ namespace QuarkGameJam3.src.Manager
     public abstract class Movible : GameObject
     {
 
-        private readonly Board tablero;
+        private readonly Board board;
 
-        public Movible(Coordinates pos, Board tablero) : base(pos, tablero)
+        public Movible(Coordinates pos, Board board) : base(pos, board)
         {
-            this.tablero = tablero;
+            this.board = board;
         }
 
-        public virtual Coordinates CalcularNuevaPosicion(Direction direccion)
+        public virtual Coordinates CalculateNewPosition(Direction direction)
         {
-            Coordinates nuevaPosicion;
-            switch (direccion)
+            Coordinates newPosition;
+            switch (direction)
             {
                 case Direction.Up:
-                    nuevaPosicion = new Coordinates(Position.X, Position.Y - 1);
+                    newPosition = new Coordinates(Position.X, Position.Y - 1);
                     break;
                 case Direction.Down:
-                    nuevaPosicion = new Coordinates(Position.X, Position.Y + 1);
+                    newPosition = new Coordinates(Position.X, Position.Y + 1);
                     break;
                 case Direction.Left:
-                    nuevaPosicion = new Coordinates(Position.X - 1, Position.Y);
+                    newPosition = new Coordinates(Position.X - 1, Position.Y);
                     break;
                 case Direction.Right:
-                    nuevaPosicion = new Coordinates(Position.X + 1, Position.Y);
+                    newPosition = new Coordinates(Position.X + 1, Position.Y);
                     break;
                 default:
-                    throw new ArgumentException("Dirección inválida");
+                    throw new ArgumentException("invalid address");
             }
-            return nuevaPosicion;
+            return newPosition;
         }
-        //public void Move(Direction direction)
-        //{
-        //    bool canMove = false;
-
-        //    if (Utilities.Utilities.Between(posicion.X, 1, 19) && Utilities.Utilities.Between(posicion.Y, 1, 9))
-        //        canMove = true;
-        //    else if (direction == Direction.Up && posicion.Y > 0)
-        //        canMove = true;
-        //    else if (direction == Direction.Right && posicion.X < 20)
-        //        canMove = true;
-        //    else if (direction == Direction.Down && posicion.Y < 10)
-        //        canMove = true;
-        //    else if (direction == Direction.Left && posicion.X > 0)
-        //        canMove = true;
-
-        //    Engine.Move(this, direction);
-          
-        //}
 
         public virtual void Move(Direction direction)
         {
-            Coordinates newPos = CalcularNuevaPosicion(direction);
+            Coordinates newPos = CalculateNewPosition(direction);
 
-            if (tablero.PosicionVacia(newPos))
+            if (board.EmptyPosition(newPos))
             {
-                tablero.MoverGameObject(this, newPos);
+                board.MoverGameObject(this, newPos);
                 Position = newPos;
             }
-            else if (tablero.HayBox(newPos))
+            else if (board.ThereIsBox(newPos))
             {
-                Box box = tablero.GetBoxAtPosition(newPos);
-                Coordinates newBoxPos = box.CalcularNuevaPosicion(direction);
+                Box box = board.GetBoxAtPosition(newPos);
+                Coordinates newBoxPos = box.CalculateNewPosition(direction);
 
-                if (tablero.PosicionVacia(newBoxPos))
+                if (board.EmptyPosition(newBoxPos))
                 {
-                    tablero.MoverGameObject(box, newBoxPos);
-                    tablero.MoverGameObject(this, newPos);
+                    board.MoverGameObject(box, newBoxPos);
+                    board.MoverGameObject(this, newPos);
                     Position = newPos;
                 }
             }
         }
 
-        protected bool PuedeMover(Direction direccion, Board tablero)
+        protected bool CanMove(Direction direction, Board board)
         {
-            Coordinates nuevaPosicion = CalcularNuevaPosicion(direccion);
-            return tablero.PosicionVacia(nuevaPosicion) && !tablero.HayBox(nuevaPosicion);
+            Coordinates newPosition = CalculateNewPosition(direction);
+            
+            return board.EmptyPosition(newPosition) && !board.ThereIsBox(newPosition);
         }
 
       

@@ -27,7 +27,7 @@ namespace QuarkGameJam3.src.Presenter
             switch (_model.State.SelectedOption)
             {
                 case MenuOption.StartGame:
-                    startGame();
+                    StartGame();
                     break;
                 case MenuOption.LevelList:
                     // Code to display the list of levels
@@ -41,10 +41,10 @@ namespace QuarkGameJam3.src.Presenter
             }
         }
 
-        private void startGame()
+        private void StartGame()
         {
             Console.Clear();
-            Board tablero = new Board(30, 30);
+            Board board = new Board(30, 30);
             int wallSize = 50;
             int consoleWidth = Console.WindowWidth;
             int consoleHeight = Console.WindowHeight;
@@ -57,12 +57,12 @@ namespace QuarkGameJam3.src.Presenter
                 {
                     if (i == wallTop || j == wallLeft || i == wallTop + wallSize - 1 || j == wallLeft + wallSize - 1)
                     {
-                        if (i >= 0 && i < tablero.filas && j >= 0 && j < tablero.columnas)
+                        if (i >= 0 && i < board.rows && j >= 0 && j < board.columns)
                         {
-                            if (tablero.EstaDentroDelTablero(new Coordinates(wallTop, wallLeft)))
+                            if (board.Insidethedashboard(new Coordinates(wallTop, wallLeft)))
                             {
-                                Wall pared = new Wall(new Coordinates(i, j), tablero);
-                                tablero.AddGameObject(pared);
+                                Wall wall = new Wall(new Coordinates(i, j), board);
+                                board.AddGameObject(wall);
                             }
                         
                         }
@@ -71,14 +71,14 @@ namespace QuarkGameJam3.src.Presenter
             }
 
 
-            tablero.Dibujar();
+            board.Draw();
 
-            QuarkGameJam3.src.Domain.Entities.Player Player = new QuarkGameJam3.src.Domain.Entities.Player(new Coordinates(5, 5) , tablero);
+            QuarkGameJam3.src.Domain.Entities.Player Player = new QuarkGameJam3.src.Domain.Entities.Player(new Coordinates(5, 5) , board);
 
             Engine.ShowGameObjectOnScreen(Player);
   
-            Box caja1 = new Box(new Coordinates(10, 10), tablero);
-            Box caja2 = new Box(new Coordinates(20, 15), tablero);
+            Box caja1 = new Box(new Coordinates(10, 10), board);
+            Box caja2 = new Box(new Coordinates(20, 15), board);
 
             Engine.ShowGameObjectOnScreen(caja1);
             Engine.ShowGameObjectOnScreen(caja2);
@@ -127,7 +127,6 @@ namespace QuarkGameJam3.src.Presenter
             _model.State.SelectedOption = (selectedIndex == count - 1) ? _model.State.SelectedOption = MenuOptions[0] : _model.State.SelectedOption = MenuOptions[selectedIndex + 1];
             _view.ShowMenuOptions(MenuOptions, SelectedOption);
         }
-
 
         #endregion
 

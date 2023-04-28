@@ -12,30 +12,22 @@ namespace QuarkGameJam3.src.Domain.Entities
         {
         }
 
-        //protected override Coordinates CalcularNuevaPosicion(Direction direccion)
-        //{
-        //    return Position.MoverEnDireccion(direccion);
-        //}
 
-
-        public override Coordinates CalcularNuevaPosicion(Direction direccion)
+        public override Coordinates CalculateNewPosition(Direction direccion)
         {
-            Coordinates nuevaPosicion = Position.MoverEnDireccion(direccion);
+            Coordinates newPosition = Position.MoverEnDireccion(direccion);
 
-            // Verificar si la nueva posición está dentro del tablero
-            if (!Board.EstaDentroDelTablero(nuevaPosicion))
+            if (!Board.Insidethedashboard(newPosition))
             {
-                return null; // La nueva posición está fuera del tablero, no se puede mover
+                return null;
             }
-
-            // Verificar si la nueva posición está ocupada por otro objeto
-            GameObject objetoEnNuevaPosicion = Board.GetBoxAtPosition(nuevaPosicion);
+            GameObject objetoEnNuevaPosicion = Board.GetBoxAtPosition(newPosition);
             if (objetoEnNuevaPosicion is Wall || objetoEnNuevaPosicion is Box)
             {
-                return null; // La nueva posición está ocupada por una pared o una caja, no se puede mover
+                return null;
             }
 
-            return nuevaPosicion; // La nueva posición está libre, se puede mover
+            return newPosition;
         }
 
     }

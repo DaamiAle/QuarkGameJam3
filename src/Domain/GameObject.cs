@@ -18,6 +18,7 @@ namespace QuarkGameJam3.src.Domain
         public void SetPosition(Coordinates newPosition)
         {
             this.Position = newPosition;
+
         }
 
     }
