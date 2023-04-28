@@ -1,5 +1,4 @@
-﻿
-using QuarkGameJam3.Menu;
+﻿using QuarkGameJam3.src;
 
 namespace QuarkGameJam3
 {
@@ -7,7 +6,7 @@ namespace QuarkGameJam3
     {
         static void Main(string[] args)
         {
-            ViewMenu menu = new();
+            GameEngine.Run();
         }
     }
 }
